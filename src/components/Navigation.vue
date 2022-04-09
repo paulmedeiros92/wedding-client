@@ -27,7 +27,9 @@ export default {
 .navigation {
   width: 100%;
   height: 80px;
-  position: static;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   border-color: rgba(222, 222, 222,0.15);
@@ -37,7 +39,6 @@ export default {
 
 .navigation__link {
   color: white;
-  font-family: 'Poppins', sans-serif;
   font-size: 13px;
   text-transform: uppercase;
   font-weight: 600;
