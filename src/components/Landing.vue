@@ -35,6 +35,7 @@ export default {
 }
 
 .landing__title {
+  font-family: 'Alex Brush', sans-serif;
   font-size: 110px;
 }
 

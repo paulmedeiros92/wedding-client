@@ -1,7 +1,9 @@
 <template>
   <div class="details">
-    <div class="details__date">October 8th, 2022</div>
-    <p class="details__location">Northampton House<br>198 W 300 N, American Fork, UT</p>
+    <div class="details__date">Saturday, October 8th, 2022</div>
+    <a target="_blank" href="https://www.google.com/maps/place/Northampton+House+-+Weddings+and+Events/@40.3834213,-111.8055761,17z/data=!3m1!4b1!4m5!3m4!1s0x874d810ca93ee429:0xc35afe0c1947a8f2!8m2!3d40.3833936!4d-111.8031206">
+      <p class="details__location">Northampton House<br>198 W 300 N.<br>American Fork, UT</p>
+    </a>
     <div class="details__timers">
       <Timer :number="ttw.days" label="Days" />
       <Timer :number="ttw.hours" label="Hours" />
@@ -37,12 +39,11 @@ export default {
       remainder -= (hours * MILLI_HOUR);
       const minutes = Math.floor(remainder / MILLI_MIN);
       const time = { days, hours, minutes };
-      console.log(time);
       return time;
     }
   },
   watch: {
-    now: {
+    offset: {
       handler() {
         setTimeout(() => this.offset = this.date - new Date(), 1000)
       },
