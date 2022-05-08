@@ -5,12 +5,33 @@
       <div v-if="attendees.length">
         <md-table v-model="attendees" md-card>
           <md-table-row slot="md-table-row" slot-scope="{ item }">
-            <md-table-cell md-label="First Name" md-sort-by="firstName">{{ item.firstName }}</md-table-cell>
-            <md-table-cell md-label="Last Name" md-sort-by="lastName">{{ item.lastName }}</md-table-cell>
-            <md-table-cell md-label="Food" md-sort-by="food">{{ item.food }}</md-table-cell>
-            <md-table-cell md-label="Notes" md-sort-by="notes">{{ item.notes }}</md-table-cell>
+            <md-table-cell md-label="First Name" md-sort-by="firstName">
+              <md-field>
+                <md-input v-model="item.firstName"></md-input>
+              </md-field>
+            </md-table-cell>
+            <md-table-cell md-label="Last Name" md-sort-by="lastName">
+              <md-field>
+                <md-input v-model="item.lastName"></md-input>
+              </md-field>
+            </md-table-cell>
+            <md-table-cell md-label="Food" md-sort-by="food">
+              <md-field>
+                <label for="food">Food</label>
+                <md-select v-model="item.food" name="food" id="food">
+                  <md-option v-for="food of foods" :key="food" :value="food">{{ food }}</md-option>
+                </md-select>
+              </md-field>
+            </md-table-cell>
+            <md-table-cell md-label="Notes" md-sort-by="notes">
+              <md-field>
+                <label>Notes</label>
+                <md-textarea v-model="item.notes" md-autogrow></md-textarea>
+              </md-field>
+            </md-table-cell>
           </md-table-row>
         </md-table>
+        <md-button class="md-primary rsvp__button" @click="onRSVP">RSVP</md-button>
         <md-button class="md-primary rsvp__button" @click="onRetry">Try again!</md-button>
       </div>
       <div v-else>
@@ -20,7 +41,7 @@
         </md-field>
         <md-field>
           <label>Last Name</label>
-          <md-input v-model="queryData.lastName"></md-input>
+          <md-input v-model="queryData.lastName" @keyup.enter="onSearch"></md-input>
         </md-field>
         <md-button class="md-primary rsvp__button" @click="onSearch">Find My Invitation</md-button>
       </div>
@@ -40,7 +61,8 @@ export default {
         firstName: null,
         lastName: null,
       },
-      attendees: []
+      attendees: [],
+      foods: ["No Selection", "Chicken", "Lobster", "Vegetarian"],
     };
   },
   methods: {
@@ -54,6 +76,9 @@ export default {
     },
     onRetry() {
       this.attendees = [];
+    },
+    onRSVP() {
+      console.log("RSVP");
     }
   }
 };
@@ -61,7 +86,7 @@ export default {
 
 <style lang="scss" scoped>
 .rsvp {
-  padding: 160px 0;
+  padding: 160px 80px;
   background-image: url('../assets/photos/landscape.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -72,7 +97,6 @@ export default {
   position: relative;
   padding: 70px 70px 100px 70px;
   background-color: white;
-  width: 600px;
   margin: auto;
   text-align: center;
   border-radius: 10px;
