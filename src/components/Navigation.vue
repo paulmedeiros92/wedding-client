@@ -1,25 +1,36 @@
 <template>
   <div class="navigation">
-    <div v-for="link of links" :key="link" class="navigation__link">
+    <div
+      v-for="link of links"
+      :key="link"
+      class="navigation__link"
+      @click="scrollTo(refs[link])"
+    >
       <span>{{ link }}</span>
-      <font-awesome-icon  class="navigation__link-icon" icon="fa-solid fa-heart" />
+      <font-awesome-icon
+        class="navigation__link-icon"
+        icon="fa-solid fa-heart"
+      />
     </div>
-    <div class="navigation__link">RSVP</div>
+    <div class="navigation__link" @click="scrollTo(refs.rsvp)">RSVP</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
+    refs: Object,
+    links: Array,
   },
-  data() {
-    return {
-      links: ['home', 'our story', 'when & where', 'our gallery', 'best friends', 'events']
-    }
-  }
-}
+  methods: {
+    scrollTo(ref) {
+      console.log(ref);
+      var top = ref.$el.offsetTop;
+      window.scrollTo({ top, left: 0, behavior: "smooth" });
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -32,7 +43,7 @@ export default {
   left: 0;
   display: flex;
   justify-content: center;
-  border-color: rgba(222, 222, 222,0.15);
+  border-color: rgba(222, 222, 222, 0.15);
   border-bottom-width: 1px;
   border-bottom-style: solid;
 }
@@ -43,11 +54,12 @@ export default {
   text-transform: uppercase;
   font-weight: 600;
   margin: auto 0;
+  cursor: pointer;
 
   .navigation__link-icon {
     margin: 2px 2em;
     font-size: 6px;
-    color: #70A076;
+    color: #70a076;
   }
 }
 </style>

@@ -44,6 +44,13 @@ export default {
 }
 
 .profile__text {
+  font-family: "Alex Brush", sans-serif;
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 60px;
   margin: auto 80px;
+  text-align: center;
+  width: 110px;
 }
 </style>
