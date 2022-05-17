@@ -1,23 +1,47 @@
 <template>
   <div class="landscape">
     <div class="landscape__story-wrapper">
-      <div class="landscape__story-title">We Are Together</div>
-      <p class="landscape__story-body">Morbi sed magna in neque vestibulum venenatis at eu metus. Mauris bibendum nibh eget justo rhoncus, eget vehicula quam condimentum. Etiam aliquam vehicula lectus, tempor varius libero.</p>
-      <div class="landscape__button-wrapper"><a class="landscape__button">Join With Us!</a></div>
+      <div class="landscape__story-title animation" ref="title">
+        We Are Together
+      </div>
+      <p class="landscape__story-body animation" ref="story">
+        Morbi sed magna in neque vestibulum venenatis at eu metus. Mauris
+        bibendum nibh eget justo rhoncus, eget vehicula quam condimentum. Etiam
+        aliquam vehicula lectus, tempor varius libero.
+      </p>
+      <div class="landscape__button-wrapper animation" ref="button">
+        <a class="landscape__button">Join Us!</a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import * as observer from "@/services/observer-service.js";
+
 export default {
   name: "Landscape",
+  data() {
+    return {
+      observer: null,
+    };
+  },
+  mounted() {
+    this.observer = observer.init();
+    this.observer.observe(this.$refs.title);
+    this.observer.observe(this.$refs.story);
+    this.observer.observe(this.$refs.button);
+  },
+  beforeUnmount() {
+    this.observer.disconnect();
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .landscape {
   padding: 160px 0;
-  background-image: url('../assets/photos/landscape.jpg');
+  background-image: url("../assets/photos/landscape.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center right;

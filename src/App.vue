@@ -70,6 +70,14 @@ body {
   animation-play-state: paused;
   animation-fill-mode: forwards;
   opacity: 0;
+
+  &--left {
+    animation-name: fadeInLeft;
+  }
+
+  &--right {
+    animation-name: fadeInRight;
+  }
 }
 
 .play-animation {
@@ -87,10 +95,21 @@ body {
   }
 }
 
-@keyframes fadeInUp {
+@keyframes fadeInRight {
   0% {
     opacity: 0;
-    transform: translate3d(0, 100%, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
   }
   100% {
     opacity: 1;

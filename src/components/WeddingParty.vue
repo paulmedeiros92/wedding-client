@@ -1,14 +1,24 @@
 <template>
   <div class="wedding-party">
-    <div class="wedding-party__title">Wedding Party!</div>
+    <div class="wedding-party__title animation" ref="title">Wedding Party!</div>
     <div class="wedding-party__nav">
-      <div :class="{'wedding-party__tab': true, 'active': isGroomside }" @click="isGroomside = true">GROOMSMEN</div>
-      <div :class="{'wedding-party__tab': true, 'active': !isGroomside }" @click="isGroomside = false">BRIDESMAIDS</div>
+      <div
+        :class="{ 'wedding-party__tab': true, active: isGroomside }"
+        @click="isGroomside = true"
+      >
+        GROOMSMEN
+      </div>
+      <div
+        :class="{ 'wedding-party__tab': true, active: !isGroomside }"
+        @click="isGroomside = false"
+      >
+        BRIDESMAIDS
+      </div>
     </div>
     <div class="wedding-party__gallery">
       <div v-for="person of people" :key="person.src">
         <div class="wedding-party__portrait">
-          <img class="image" :src="person.src"  />
+          <img class="image" :src="person.src" />
         </div>
         <div class="wedding-party__person-title">{{ person.name }}</div>
       </div>
@@ -17,25 +27,41 @@
 </template>
 
 <script>
+import * as observer from "@/services/observer-service.js";
+
 export default {
   name: "WeddingParty",
   data() {
     return {
       groomsParty: [
-        { name: "Joseph Guarino", src: require("@/assets/party/alexander.jpg") },
-        { name: "Alexander Hipshire", src: require("@/assets/party/victoria.jpg") }
+        {
+          name: "Joseph Guarino",
+          src: require("@/assets/party/alexander.jpg"),
+        },
+        {
+          name: "Alexander Hipshire",
+          src: require("@/assets/party/victoria.jpg"),
+        },
       ],
       bridesParty: [
         { name: "Debbie Yuong", src: require("@/assets/party/victoria.jpg") },
-        { name: "Antonio Bass", src: require("@/assets/party/alexander.jpg") }
+        { name: "Antonio Bass", src: require("@/assets/party/alexander.jpg") },
       ],
       isGroomside: false,
+      observer: null,
     };
+  },
+  mounted() {
+    this.observer = observer.init();
+    this.observer.observe(this.$refs.title);
   },
   computed: {
     people() {
       return this.isGroomside ? this.groomsParty : this.bridesParty;
-    }
+    },
+  },
+  beforeUnmount() {
+    this.observer.disconnect();
   },
 };
 </script>
@@ -45,8 +71,8 @@ export default {
   margin-top: 100px;
 }
 .wedding-party__title {
-  font-family: 'Alex Brush', sans-serif;
-  color: #1A1A1A;
+  font-family: "Alex Brush", sans-serif;
+  color: #1a1a1a;
   font-weight: 400;
   font-size: 50px;
   line-height: 60px;
@@ -54,7 +80,7 @@ export default {
 }
 .wedding-party__nav {
   margin-top: 15px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   text-align: center;
   display: flex;
@@ -63,13 +89,13 @@ export default {
 
 .wedding-party__tab {
   padding: 14px 20px;
-  color: #808080; 
-  border:  3px solid rgba(112, 160, 112, 0);
+  color: #808080;
+  border: 3px solid rgba(112, 160, 112, 0);
   cursor: pointer;
   transition: border 0.1s ease-in;
 
   &.active {
-    color: #70A070;
+    color: #70a070;
     border-bottom: 3px solid rgba(112, 160, 112, 1);
   }
 }
@@ -80,7 +106,6 @@ export default {
   display: flex;
   justify-content: center;
 }
-
 
 .wedding-party__portrait {
   margin: 40px 15px 30px 15px;

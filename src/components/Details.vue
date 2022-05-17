@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import * as observer from "@/services/observer-service.js";
 import Timer from "@/components/Timer.vue";
 
 const MILLI_DAY = 86400000;
@@ -46,7 +47,7 @@ export default {
     };
   },
   mounted() {
-    this.observer = new IntersectionObserver(this.onObserved, { threshold: 1 });
+    this.observer = observer.init();
     this.observer.observe(this.$refs.date);
     this.observer.observe(this.$refs.link);
     this.observer.observe(this.$refs.location);
@@ -72,11 +73,8 @@ export default {
       immediate: true,
     },
   },
-  methods: {
-    onObserved(entries) {
-      if (entries[0].intersectionRatio <= 0) return;
-      entries.forEach((entry) => entry.target.classList.add("play-animation"));
-    },
+  beforeUnmount() {
+    this.observer.disconnect();
   },
 };
 </script>

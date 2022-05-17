@@ -1,18 +1,34 @@
 <template>
   <div class="profile">
-    <div class="profile__image-wrapper">
+    <div class="profile__image-wrapper animation animation--left" ref="paul">
       <img class="profile__image paul" src="@/assets/photos/profile-paul.jpg" />
     </div>
-    <div class="profile__text">Paul & Tori</div>
-    <div class="profile__image-wrapper">
+    <div class="profile__text animation" ref="names">Paul & Tori</div>
+    <div class="profile__image-wrapper animation animation--right" ref="tori">
       <img class="profile__image tori" src="@/assets/photos/profile-tori.jpg" />
     </div>
   </div>
 </template>
 
 <script>
+import * as observer from "@/services/observer-service.js";
+
 export default {
   name: "Profile",
+  data() {
+    return {
+      observer: null,
+    };
+  },
+  mounted() {
+    this.observer = observer.init();
+    this.observer.observe(this.$refs.names);
+    this.observer.observe(this.$refs.paul);
+    this.observer.observe(this.$refs.tori);
+  },
+  beforeUnmount() {
+    this.observer.disconnect();
+  },
 };
 </script>
 

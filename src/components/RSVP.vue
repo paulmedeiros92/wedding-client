@@ -1,7 +1,7 @@
 <template>
   <div class="rsvp" id="RSVP">
     <div :class="['rsvp__wrapper', { found: attendees }]">
-      <div class="rsvp__title">Join Us!</div>
+      <div class="rsvp__title animation" ref="title">Join Us!</div>
       <div v-if="attendees">
         <Input
           class="rsvp__email"
@@ -95,6 +95,7 @@ import Loader from "@/components/Loader.vue";
 import Input from "@/components/Input.vue";
 import Select from "@/components/Select.vue";
 import * as api from "@/api/api-service";
+import * as observer from "@/services/observer-service.js";
 
 export default {
   name: "RSVP",
@@ -121,10 +122,12 @@ export default {
       foods: ["No Selection", "Chicken", "Lobster", "Vegetarian"],
       email: { value: null, invalid: true },
       loading: false,
+      observer: null,
     };
   },
   mounted() {
-    this.attendeeForms;
+    this.observer = observer.init();
+    this.observer.observe(this.$refs.title);
   },
   watch: {},
   computed: {
@@ -237,6 +240,9 @@ export default {
         this.loading = false;
       }
     },
+  },
+  beforeUnmount() {
+    this.observer.disconnect();
   },
 };
 </script>
