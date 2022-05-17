@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation">
+  <div class="navigation animation animation--down" :class="{ fixed: isFixed }">
     <div
       v-for="link of links"
       :key="link"
@@ -23,12 +23,39 @@ export default {
     refs: Object,
     links: Array,
   },
+  data() {
+    return {
+      observer: null,
+      topObserver: null,
+      isFixed: false,
+    };
+  },
+  mounted() {
+    this.observer = new IntersectionObserver(this.onObserved, { threshold: 0 });
+    this.observer.observe(this.$el);
+    this.topObserver = new IntersectionObserver(this.onTopObserved, {
+      threshold: 1,
+    });
+    this.topObserver.observe(this.refs["home"].$el);
+  },
   methods: {
     scrollTo(ref) {
       console.log(ref);
       var top = ref.$el.offsetTop;
       window.scrollTo({ top, left: 0, behavior: "smooth" });
     },
+    onObserved(entries) {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio === 0) this.isFixed = true;
+      });
+    },
+    onTopObserved(entries) {
+      if (entries[0].intersectionRatio <= 0) return;
+      entries.forEach(() => (this.isFixed = false));
+    },
+  },
+  beforeUnmount() {
+    this.observer.disconnect();
   },
 };
 </script>
@@ -46,6 +73,19 @@ export default {
   border-color: rgba(222, 222, 222, 0.15);
   border-bottom-width: 1px;
   border-bottom-style: solid;
+  z-index: 100;
+  opacity: 1;
+}
+
+.fixed {
+  animation-play-state: running;
+  position: fixed;
+  background-color: white;
+  opacity: 0;
+
+  .navigation__link {
+    color: #282828;
+  }
 }
 
 .navigation__link {
@@ -55,6 +95,11 @@ export default {
   font-weight: 600;
   margin: auto 0;
   cursor: pointer;
+  transition: color 0.25s ease-in;
+
+  &:hover {
+    color: #70a076;
+  }
 
   .navigation__link-icon {
     margin: 2px 2em;
