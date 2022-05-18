@@ -4,7 +4,7 @@
     <Landing ref="home" />
     <Details ref="details" />
     <Profile ref="us" />
-    <Landscape ref="story" />
+    <Landscape ref="story" :jumpToRef="$refs['rsvp']" />
     <Gallery ref="gallery" />
     <WeddingParty ref="party" />
     <RSVP ref="rsvp" />

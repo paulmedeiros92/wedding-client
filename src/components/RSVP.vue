@@ -192,7 +192,6 @@ export default {
       // Update the row with form values
       const selectedForm = this.forms[index];
       const selectedRow = this.rows[index];
-      console.log(selectedForm);
       Object.keys(selectedForm).forEach(
         (key) => (selectedRow[key] = selectedForm[key].value)
       );

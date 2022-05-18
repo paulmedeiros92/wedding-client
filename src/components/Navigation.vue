@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     scrollTo(ref) {
-      console.log(ref);
       var top = ref.$el.offsetTop;
       window.scrollTo({ top, left: 0, behavior: "smooth" });
     },

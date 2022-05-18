@@ -9,8 +9,10 @@
         bibendum nibh eget justo rhoncus, eget vehicula quam condimentum. Etiam
         aliquam vehicula lectus, tempor varius libero.
       </p>
-      <div class="landscape__button-wrapper animation" ref="button">
-        <a class="landscape__button">Join Us!</a>
+      <div class="animation" ref="button">
+        <md-button class="md-primary md-raised" @click="scrollTo"
+          >Join Us!</md-button
+        >
       </div>
     </div>
   </div>
@@ -31,6 +33,15 @@ export default {
     this.observer.observe(this.$refs.title);
     this.observer.observe(this.$refs.story);
     this.observer.observe(this.$refs.button);
+  },
+  methods: {
+    scrollTo() {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+      });
+    },
   },
   beforeUnmount() {
     this.observer.disconnect();
@@ -61,17 +72,5 @@ export default {
 
 .landscape__story-body {
   margin-bottom: 45px;
-}
-
-.landscape__button {
-  color: #282828;
-  background-color: white;
-  padding: 15px 40px;
-  border-radius: 5px;
-
-  &:hover {
-    color: white;
-    background-color: #70a076;
-  }
 }
 </style>

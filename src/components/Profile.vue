@@ -1,20 +1,24 @@
 <template>
   <div class="profile">
-    <div class="profile__image-wrapper animation animation--left" ref="paul">
-      <img class="profile__image paul" src="@/assets/photos/profile-paul.jpg" />
+    <Avatar imgSrc="photos/profile-tori.jpg" />
+    <div class="profile__text animation" ref="names">
+      Tori
+      <img class="banner" src="@/assets/succulent.png" />
+      Paul
     </div>
-    <div class="profile__text animation" ref="names">Paul & Tori</div>
-    <div class="profile__image-wrapper animation animation--right" ref="tori">
-      <img class="profile__image tori" src="@/assets/photos/profile-tori.jpg" />
-    </div>
+    <Avatar imgSrc="photos/profile-paul.jpg" :isLeft="false" />
   </div>
 </template>
 
 <script>
+import Avatar from "@/components/Avatar.vue";
 import * as observer from "@/services/observer-service.js";
 
 export default {
   name: "Profile",
+  components: {
+    Avatar,
+  },
   data() {
     return {
       observer: null,
@@ -23,8 +27,6 @@ export default {
   mounted() {
     this.observer = observer.init();
     this.observer.observe(this.$refs.names);
-    this.observer.observe(this.$refs.paul);
-    this.observer.observe(this.$refs.tori);
   },
   beforeUnmount() {
     this.observer.disconnect();
