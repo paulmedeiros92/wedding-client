@@ -38,8 +38,11 @@ export default {
     };
   },
   watch: {
-    invalid() {
-      this.$emit("input", { value: this.value.value, invalid: this.invalid });
+    invalid: {
+      handler() {
+        this.$emit("input", { value: this.value.value, invalid: this.invalid });
+      },
+      immediate: true,
     },
   },
   computed: {

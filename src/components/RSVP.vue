@@ -1,15 +1,15 @@
 <template>
   <div class="rsvp" id="RSVP">
-    <div :class="['rsvp__wrapper', { found: attendees }]">
+    <div :class="['rsvp__wrapper', { found: forms.length }]">
       <div class="rsvp__title animation" ref="title">Join Us!</div>
-      <div v-if="attendees">
+      <div v-if="forms.length">
         <Input
           class="rsvp__email"
           v-model="email"
           label="Primary Contact Email"
           required
         />
-        <md-table v-model="rows" md-card>
+        <md-table v-model="forms" md-card>
           <md-table-row slot="md-table-row" slot-scope="{ index }">
             <md-table-cell md-label="First Name" md-sort-by="firstName">
               <Input v-model="forms[index].firstName" required />
@@ -32,7 +32,7 @@
               <md-button
                 v-if="index === forms.length - 1"
                 class="md-icon-button md-primary md-raised rsvp__add-attendee"
-                @click="onAddAttendee(index)"
+                @click="addForm"
                 :disabled="
                   Object.values(forms[index]).some((field) => field.invalid)
                 "
@@ -87,6 +87,21 @@
       </div>
       <img class="rsvp__flower" src="@/assets/green-flower.png" />
     </div>
+    <md-snackbar
+      :class="{ error: snackbar.isError }"
+      md-position="center"
+      :md-duration="3000"
+      :md-active.sync="showSnackbar"
+      md-persistent
+    >
+      <span>{{ snackbar.text }}</span>
+      <md-button
+        v-if="snackbar.isError"
+        class="md-dense md-raised md-primary"
+        @click="onReport"
+        >Email Us!</md-button
+      >
+    </md-snackbar>
   </div>
 </template>
 
@@ -116,13 +131,18 @@ export default {
           invalid: true,
         },
       },
-      attendees: null,
+      attendees: [],
       rows: [],
       forms: [],
       foods: ["No Selection", "Chicken", "Lobster", "Vegetarian"],
       email: { value: null, invalid: true },
       loading: false,
       observer: null,
+      showSnackbar: false,
+      snackbar: {
+        isError: true,
+        text: "testing error",
+      },
     };
   },
   mounted() {
@@ -142,78 +162,109 @@ export default {
           .some((form) => Object.values(form).some((field) => field.invalid))
       );
     },
+    isLastFormInvalid() {
+      return Object.values(this.forms[this.forms.length - 1]).some(
+        (field) => field.invalid
+      );
+    },
   },
   methods: {
     async onSearch() {
       try {
         this.loading = true;
-        const houseData = await api.getSearchHousehold(
+        const response = await api.getSearchHousehold(
           this.queryData.firstName.value,
           this.queryData.lastName.value
         );
-        this.attendees = houseData.data.data;
-        this.addNewRow();
-        this.forms = this.rows.map((attendee) => ({
-          firstName: { value: attendee.firstName, invalid: true },
-          lastName: { value: attendee.lastName, invalid: true },
-          notes: { value: attendee.notes, invalid: true },
-          food: { value: attendee.food, invalid: false },
-          isAttending: { value: attendee.isAttending, invalid: false },
-        }));
-        this.email.value = this.attendees[0].email;
-        this.loading = false;
+        this.attendees = response.data?.data ?? [];
+        if (this.attendees.length) {
+          this.email.value = this.attendees[0].email;
+          this.forms = this.buildForms(this.attendees);
+        } else {
+          this.snackbar = {
+            isError: false,
+            text: `Sorry we didn't find anything for ${this.queryData.firstName.value} ${this.queryData.lastName.value}, please try another name`,
+          };
+          this.showSnackbar = true;
+        }
       } catch (error) {
-        console.error(error);
+        this.snackbar = {
+          isError: true,
+          text: error,
+        };
+        this.showSnackbar = true;
+      } finally {
         this.loading = false;
       }
     },
+    buildForms(attendees) {
+      const forms = attendees.map((attendee) => ({
+        firstName: { value: attendee.firstName, invalid: true },
+        lastName: { value: attendee.lastName, invalid: true },
+        notes: { value: attendee.notes, invalid: true },
+        food: { value: attendee.food, invalid: true },
+        isAttending: { value: attendee.isAttending, invalid: false },
+      }));
+      forms.push({
+        firstName: { value: "", invalid: true },
+        lastName: { value: "", invalid: true },
+        notes: { value: "", invalid: true },
+        food: { value: "No Selection", invalid: true },
+        isAttending: { value: false, invalid: false },
+      });
+      return forms;
+    },
     onRetry() {
-      this.attendees = null;
+      this.forms = [];
+      this.queryData.firstName.value = "";
+      this.queryData.lastName.value = "";
+    },
+    formsToAttendees(forms, attendees, email) {
+      attendees.forEach((attendee, index) => {
+        Object.keys(forms[0]).forEach(
+          (key) => (attendee[key] = forms[index][key].value)
+        );
+        attendee.email = email.value;
+      });
+      const newAttendees = [];
+      forms.map((form, index) => {
+        if (Object.values(form).every((field) => !field.invalid)) {
+          let attendee;
+          if (attendees[index]) {
+            attendee = { ...attendees[index] };
+          } else {
+            attendee = { ...attendees[0] };
+          }
+          Object.entries(form).forEach(
+            ([key, field]) => (attendee[key] = field.value)
+          );
+          newAttendees.push(attendee);
+        }
+      });
+      return newAttendees;
     },
     async onRSVP() {
       try {
         this.loading = true;
-        // if the new row is valid add it to attendees
-        if (
-          Object.values(this.forms[this.forms.length - 1]).every(
-            (field) => !field.invalid
-          )
-        ) {
-          this.onAddAttendee(this.forms.length - 1);
-        }
-        await api.postAttendees(this.attendees);
-        this.loading = false;
+        await api.postAttendees(
+          this.formsToAttendees(this.forms, this.attendees, this.email)
+        );
+        this.snackbar = {
+          isError: false,
+          text: "Success, we will see you in Utah!",
+        };
       } catch (error) {
-        console.error(error);
+        this.snackbar = {
+          isError: true,
+          text: "Uh-oh something went wrong, please try again or contact us",
+        };
+      } finally {
         this.loading = false;
+        this.showSnackbar = true;
+        this.onRetry();
       }
     },
-    onAddAttendee(index) {
-      // Update the row with form values
-      const selectedForm = this.forms[index];
-      const selectedRow = this.rows[index];
-      Object.keys(selectedForm).forEach(
-        (key) => (selectedRow[key] = selectedForm[key].value)
-      );
-      this.attendees = this.rows;
-      this.addNewForm();
-      this.addNewRow();
-    },
-    addNewRow() {
-      this.rows = [
-        ...this.attendees,
-        {
-          ...this.attendees[0],
-          firstName: "",
-          lastName: "",
-          notes: "",
-          food: "No Selection",
-          hashWord: null,
-          isAttending: false,
-        },
-      ];
-    },
-    addNewForm() {
+    addForm() {
       this.forms = [
         ...this.forms,
         {
@@ -228,16 +279,34 @@ export default {
     async onDeleteAttendee(index) {
       try {
         this.loading = true;
-        const selectedRow = this.rows[index];
-        if (selectedRow.hashWord) {
-          await api.markForDeletion(selectedRow.hashWord);
+        // is attendee already in the database?
+        if (this.attendees[index].hashWord) {
+          await api.markForDeletion(this.attendees[index].hashWord);
         }
+        const name = `${this.forms[index].firstName.value} ${this.forms[index].lastName.value}`;
         this.forms.splice(index, 1);
-        this.rows.splice(index, 1);
-        this.loading = false;
+        this.snackbar = {
+          isError: false,
+          text: `Success, ${name} was deleted`,
+        };
       } catch (error) {
+        this.snackbar = {
+          isError: true,
+          text: "Uh-oh something went wrong, please try again or contact us",
+        };
+      } finally {
         this.loading = false;
+        this.showSnackbar = true;
       }
+    },
+    onReport() {
+      const subject = "Bug Report: Wedding Website";
+      const body =
+        "Hi I found a bug on your website while (describe action), on my (describe device). Below are some helpful screenshots! (Please attach screenshots)";
+      window.open(
+        `mailto:v100822m@gmail.com&subject=${subject}&body=${body}`,
+        "_self"
+      );
     },
   },
   beforeUnmount() {
@@ -253,6 +322,10 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center right;
+
+  @media (max-width: 1500px) {
+    padding: 10vw 1vw;
+  }
 }
 
 .rsvp__wrapper {
@@ -269,6 +342,7 @@ export default {
 
   &.found {
     max-width: 100%;
+    padding: 2vw 1vw 5vw 2vw;
   }
 }
 
@@ -304,5 +378,13 @@ export default {
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 50%);
+}
+
+.md-snackbar.md-position-center {
+  background-color: #70a076;
+
+  &.error {
+    background-color: #e49497;
+  }
 }
 </style>
