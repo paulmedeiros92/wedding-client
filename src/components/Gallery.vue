@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       imageSources: require
-        .context("@/assets/gallery", true, /^.*\.jpg$/)
+        .context("@/assets/gallery", true, /^.*\.webp$/)
         .keys()
         .map((src) => src.split("./")[1]),
       visibleIndex: 0,

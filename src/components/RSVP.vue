@@ -249,7 +249,7 @@ export default {
 <style lang="scss" scoped>
 .rsvp {
   padding: 15vw 8vw;
-  background-image: url("../assets/photos/rsvp.jpg");
+  background-image: url("../assets/photos/rsvp.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center right;

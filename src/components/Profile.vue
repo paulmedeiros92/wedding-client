@@ -1,8 +1,8 @@
 <template>
   <div class="profile">
     <div class="profile__avatar-wrapper">
-      <Avatar imgSrc="photos/profile-tori.jpg" />
-      <Avatar imgSrc="photos/profile-paul.jpg" :isLeft="false" />
+      <Avatar imgSrc="photos/profile-tori.webp" />
+      <Avatar imgSrc="photos/profile-paul.webp" :isLeft="false" />
     </div>
     <div class="profile__text animation" ref="names">
       <span class="profile__center">Tori</span>

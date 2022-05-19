@@ -24,7 +24,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-image: url("../assets/photos/landing.jpg");
+  background-image: url("../assets/photos/landing.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;

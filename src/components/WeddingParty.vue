@@ -40,18 +40,18 @@ export default {
   data() {
     return {
       groomsParty: [
-        { name: "Joseph Guarino", src: "party/joe.jpg" },
-        { name: "Alexander Hipsher", src: "party/alex.jpg" },
-        { name: "Michael Medeiros", src: "party/joe.jpg" },
-        { name: "Moses Medeiros", src: "party/moses.jpg" },
-        { name: "David Medeiros", src: "party/david.jpg" },
+        { name: "Joseph Guarino", src: "party/joe.webp" },
+        { name: "Alexander Hipsher", src: "party/alex.webp" },
+        { name: "Michael Medeiros", src: "party/michael.webp" },
+        { name: "Moses Medeiros", src: "party/moses.webp" },
+        { name: "David Medeiros", src: "party/david.webp" },
       ],
       bridesParty: [
-        { name: "Debbie Yuong", src: "party/debbie.jpg" },
-        { name: "Jenny Something", src: "party/jenny.png" },
-        { name: "Antonio Bass", src: "party/antonio.jpg" },
-        { name: "Hannah Something", src: "party/hannah.jpg" },
-        { name: "Keala Something", src: "party/joe.jpg" },
+        { name: "Debbie Young", src: "party/debbie.webp" },
+        { name: "Jenny Moran", src: "party/jenny.webp" },
+        { name: "Antonio Bass", src: "party/antonio.webp" },
+        { name: "Hannah Scarff", src: "party/hannah.webp" },
+        { name: "Keala Kieckhafer", src: "party/keala.webp" },
       ],
       isGroomside: false,
       observer: null,

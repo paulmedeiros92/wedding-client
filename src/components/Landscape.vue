@@ -52,14 +52,14 @@ export default {
 <style lang="scss" scoped>
 .landscape {
   padding: 160px 0;
-  background-image: url("../assets/photos/landscape.jpg");
+  background-image: url("../assets/photos/landscape.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center right;
 }
 
 .landscape__story-wrapper {
-  padding: 5vw 4vw;
+  padding: 3vw 4vw;
   background-color: #f7f7f7;
   max-width: 600px;
   margin: 0 20px 0 180px;
