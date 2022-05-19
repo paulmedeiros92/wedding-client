@@ -1,7 +1,7 @@
 <template>
   <div class="navigation animation animation--down" :class="{ fixed: isFixed }">
     <div
-      v-for="link of links"
+      v-for="link of visibleLinks"
       :key="link"
       class="navigation__link"
       @click="scrollTo(refs[link])"
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Navigation",
   props: {
     refs: Object,
     links: Array,
@@ -26,17 +26,29 @@ export default {
   data() {
     return {
       observer: null,
+      resizeObserver: null,
       topObserver: null,
       isFixed: false,
+      isMobile: window.innerWidth <= 600,
     };
   },
   mounted() {
+    this.resizeObserver = new ResizeObserver(this.onResize);
+    this.resizeObserver.observe(document.body);
     this.observer = new IntersectionObserver(this.onObserved, { threshold: 0 });
     this.observer.observe(this.$el);
     this.topObserver = new IntersectionObserver(this.onTopObserved, {
       threshold: 1,
     });
     this.topObserver.observe(this.refs["home"].$el);
+  },
+  computed: {
+    visibleLinks() {
+      if (this.isMobile) {
+        return ["home", "details"];
+      }
+      return this.links;
+    },
   },
   methods: {
     scrollTo(ref) {
@@ -52,9 +64,14 @@ export default {
       if (entries[0].intersectionRatio <= 0) return;
       entries.forEach(() => (this.isFixed = false));
     },
+    onResize() {
+      this.isMobile = window.innerWidth <= 600;
+    },
   },
   beforeUnmount() {
     this.observer.disconnect();
+    this.topObserver.disconnect();
+    this.resizeObserver.disconnect();
   },
 };
 </script>
@@ -88,7 +105,7 @@ export default {
 }
 
 .navigation__link {
-  color: white;
+  color: #70a076;
   font-size: 13px;
   text-transform: uppercase;
   font-weight: 600;
@@ -97,13 +114,22 @@ export default {
   transition: color 0.25s ease-in;
 
   &:hover {
-    color: #70a076;
+    color: #e49497;
   }
 
   .navigation__link-icon {
     margin: 2px 2em;
     font-size: 6px;
-    color: #70a076;
+    color: #e49497;
+
+    @media (max-width: 600px) {
+      font-size: 12px;
+      margin: 2px 1em;
+    }
+  }
+
+  @media (max-width: 600px) {
+    font-size: 24px;
   }
 }
 </style>

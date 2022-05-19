@@ -248,8 +248,8 @@ export default {
 
 <style lang="scss" scoped>
 .rsvp {
-  padding: 160px 80px;
-  background-image: url("../assets/photos/landscape.jpg");
+  padding: 15vw 8vw;
+  background-image: url("../assets/photos/rsvp.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center right;
@@ -257,7 +257,7 @@ export default {
 
 .rsvp__wrapper {
   position: relative;
-  padding: 70px 70px 100px 70px;
+  padding: 7vw 7vw 10vw 7vw;
   background-color: white;
   margin: auto;
   text-align: center;

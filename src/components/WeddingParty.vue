@@ -3,49 +3,55 @@
     <div class="wedding-party__title animation" ref="title">Wedding Party!</div>
     <div class="wedding-party__nav">
       <div
-        :class="{ 'wedding-party__tab': true, active: isGroomside }"
-        @click="isGroomside = true"
-      >
-        GROOMSMEN
-      </div>
-      <div
         :class="{ 'wedding-party__tab': true, active: !isGroomside }"
         @click="isGroomside = false"
       >
         BRIDESMAIDS
       </div>
+      <div
+        :class="{ 'wedding-party__tab': true, active: isGroomside }"
+        @click="isGroomside = true"
+      >
+        GROOMSMEN
+      </div>
     </div>
-    <div class="wedding-party__gallery">
+    <div class="wedding-party__gallery animation" ref="gallery">
       <div v-for="person of people" :key="person.src">
-        <div class="wedding-party__portrait">
-          <img class="image" :src="person.src" />
-        </div>
-        <div class="wedding-party__person-title">{{ person.name }}</div>
+        <Avatar
+          :imgSrc="person.src"
+          :size="15"
+          :title="person.name"
+          :hasAnimation="false"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Avatar from "@/components/Avatar.vue";
 import * as observer from "@/services/observer-service.js";
 
 export default {
   name: "WeddingParty",
+  components: {
+    Avatar,
+  },
   data() {
     return {
       groomsParty: [
-        {
-          name: "Joseph Guarino",
-          src: require("@/assets/party/alexander.jpg"),
-        },
-        {
-          name: "Alexander Hipshire",
-          src: require("@/assets/party/victoria.jpg"),
-        },
+        { name: "Joseph Guarino", src: "party/joe.jpg" },
+        { name: "Alexander Hipsher", src: "party/alex.jpg" },
+        { name: "Michael Medeiros", src: "party/joe.jpg" },
+        { name: "Moses Medeiros", src: "party/moses.jpg" },
+        { name: "David Medeiros", src: "party/david.jpg" },
       ],
       bridesParty: [
-        { name: "Debbie Yuong", src: require("@/assets/party/victoria.jpg") },
-        { name: "Antonio Bass", src: require("@/assets/party/alexander.jpg") },
+        { name: "Debbie Yuong", src: "party/debbie.jpg" },
+        { name: "Jenny Something", src: "party/jenny.png" },
+        { name: "Antonio Bass", src: "party/antonio.jpg" },
+        { name: "Hannah Something", src: "party/hannah.jpg" },
+        { name: "Keala Something", src: "party/joe.jpg" },
       ],
       isGroomside: false,
       observer: null,
@@ -54,6 +60,7 @@ export default {
   mounted() {
     this.observer = observer.init();
     this.observer.observe(this.$refs.title);
+    this.observer.observe(this.$refs.gallery);
   },
   computed: {
     people() {
@@ -101,10 +108,14 @@ export default {
 }
 
 .wedding-party__gallery {
-  margin-top: 40px;
+  padding-top: 40px;
   border-top: 1px solid #eee;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  margin: 0 5vw 2vw 5vw;
+  gap: 3vw;
+  overflow-x: scroll;
+  scrollbar-width: thin;
 }
 
 .wedding-party__portrait {

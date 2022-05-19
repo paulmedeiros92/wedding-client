@@ -1,9 +1,15 @@
 <template>
   <div
-    class="avatar animation"
-    :class="{ 'animation--left': isLeft, 'animation--right': !isLeft }"
+    class="avatar"
+    :class="{
+      visible: !hasAnimation,
+      animation: hasAnimation,
+      'animation--left': hasAnimation && isLeft,
+      'animation--right': hasAnimation && !isLeft,
+    }"
   >
     <div class="avatar__image" :style="style"></div>
+    <div v-if="title" class="avatar__title">{{ title }}</div>
   </div>
 </template>
 
@@ -25,6 +31,14 @@ export default {
       type: String,
       default: "",
     },
+    size: {
+      type: Number,
+      default: 25,
+    },
+    hasAnimation: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -33,27 +47,43 @@ export default {
     };
   },
   mounted() {
-    this.observer = observer.init();
-    this.observer.observe(this.$el);
+    if (this.hasAnimation) {
+      this.observer = observer.init();
+      this.observer.observe(this.$el);
+    }
     this.style = {
       "background-image": `url(${require("@/assets/" + this.imgSrc)})`,
+      height: `${this.size}vw`,
+      width: `${this.size}vw`,
     };
   },
   beforeUnmount() {
-    this.observer.disconnect();
+    if (this.hasAnimation) {
+      this.observer.disconnect();
+    }
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.visible {
+  opacity: 1;
+}
 .avatar {
   position: relative;
+
+  &__title {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #1a1a1a;
+    text-align: center;
+    padding: 20px 0;
+  }
 }
 .avatar__image {
   overflow: hidden;
   border-radius: 50%;
-  height: 350px;
-  width: 350px;
   background-size: cover;
 }
 </style>

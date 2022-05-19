@@ -59,18 +59,34 @@ export default {
 }
 
 .landscape__story-wrapper {
-  padding: 70px 50px;
+  padding: 5vw 4vw;
   background-color: #f7f7f7;
-  width: 600px;
-  margin-left: 180px;
+  max-width: 600px;
+  margin: 0 20px 0 180px;
   text-align: center;
+
+  @media (max-width: 600px) {
+    margin: 0 20px 0 40px;
+  }
 }
 
 .landscape__story-title {
+  font-family: "Alex Brush", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  line-height: 60px;
   margin-bottom: 25px;
 }
 
 .landscape__story-body {
+  color: #808080;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  text-transform: none;
+  letter-spacing: 0px;
+  font-weight: 400;
   margin-bottom: 45px;
 }
 </style>

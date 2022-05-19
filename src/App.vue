@@ -88,6 +88,33 @@ body {
   animation-play-state: running;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  transition: background-color 0.2s ease-in;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: #f1f1f1;
+  }
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;

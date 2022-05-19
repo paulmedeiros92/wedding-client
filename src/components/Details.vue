@@ -96,6 +96,8 @@ export default {
   font-weight: 400;
   font-size: 50px;
   line-height: 60px;
+  margin: 0 20px;
+  text-align: center;
 }
 
 .details__location {

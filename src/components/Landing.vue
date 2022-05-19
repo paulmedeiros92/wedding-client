@@ -46,9 +46,17 @@ export default {
   font-family: "Alex Brush", sans-serif;
   font-size: 110px;
   line-height: 110px;
+
+  @media (max-width: 600px) {
+    text-align: center;
+  }
 }
 
 .landing__subtext {
   font-size: 26px;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 </style>

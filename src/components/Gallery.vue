@@ -2,17 +2,20 @@
   <div class="gallery">
     <div class="gallery-title animation" ref="title">Best Moments</div>
     <div class="gallery__viewer">
-      <img
+      <div
         v-for="image of images"
         :key="image.src"
         :class="['gallery__image', image.positionClass]"
-        :src="image.src"
-      />
+        :style="{
+          'background-image': `url(${require('@/assets/gallery/' +
+            image.src)})`,
+        }"
+      ></div>
       <div class="dot-wrapper">
         <div
           v-for="(image, index) of images"
           :key="image.src + 'dot'"
-          :class="{ dot: true, selected: visibleIndex === index }"
+          :class="['dot', { selected: visibleIndex === index }]"
           @click="visibleIndex = index"
         ></div>
       </div>
@@ -30,7 +33,7 @@ export default {
       imageSources: require
         .context("@/assets/gallery", true, /^.*\.jpg$/)
         .keys()
-        .map((src) => require(`@/assets/gallery/${src.split("./")[1]}`)),
+        .map((src) => src.split("./")[1]),
       visibleIndex: 0,
       observer: null,
     };
@@ -96,16 +99,30 @@ export default {
   overflow: hidden;
   position: relative;
   margin-top: 40px;
+
+  @media (max-width: 800px) {
+    height: 400px;
+    width: 100%;
+  }
 }
 
 .gallery__image {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 400px;
   margin: 0 auto;
   height: 600px;
+  width: 100%;
   transition: transform 0.5s ease-in;
-  transform: translateX(0);
+  transform: translateX(-50%);
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 800px) {
+    left: 50%;
+    height: 400px;
+  }
 }
 
 .right {
@@ -122,11 +139,12 @@ export default {
 
 .dot {
   background-color: white;
-  height: 10px;
-  width: 10px;
+  height: 2vw;
+  width: 2vw;
   border-radius: 50%;
   z-index: 99;
-  margin: 0 5px 20px 5px;
+  margin: 0 1vw 20px 1vw;
+  cursor: pointer;
 
   &.selected {
     background-color: #70a070;
