@@ -47,7 +47,7 @@ export default {
         { name: "David Medeiros", src: "party/david.webp" },
       ],
       bridesParty: [
-        { name: "Debbie Young", src: "party/debbie.webp" },
+        { name: "Debbie Vuong", src: "party/debbie.webp" },
         { name: "Jenny Moran", src: "party/jenny.webp" },
         { name: "Antonio Bass", src: "party/antonio.webp" },
         { name: "Hannah Scarff", src: "party/hannah.webp" },
