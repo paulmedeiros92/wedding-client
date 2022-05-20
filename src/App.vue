@@ -5,6 +5,7 @@
     <Details ref="details" />
     <Profile ref="us" />
     <Landscape ref="story" :jumpToRef="$refs['rsvp']" />
+    <Story />
     <Gallery ref="gallery" />
     <WeddingParty ref="party" />
     <RSVP ref="rsvp" />
@@ -20,6 +21,7 @@ import Landscape from "@/components/Landscape.vue";
 import Gallery from "@/components/Gallery.vue";
 import WeddingParty from "@/components/WeddingParty.vue";
 import RSVP from "@/components/RSVP.vue";
+import Story from "@/components/Story/Story.vue";
 
 export default {
   name: "App",
@@ -32,6 +34,7 @@ export default {
     Gallery,
     WeddingParty,
     RSVP,
+    Story,
   },
   data() {
     return {
@@ -61,6 +64,10 @@ export default {
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
+  color: #1a1a1a;
+  --primary-color: #70a076;
+  --accent-color: #e49497;
+  --grey-color: #808080;
 }
 
 .animation {

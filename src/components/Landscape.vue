@@ -5,9 +5,9 @@
         We Are Together
       </div>
       <p class="landscape__story-body animation" ref="story">
-        Morbi sed magna in neque vestibulum venenatis at eu metus. Mauris
-        bibendum nibh eget justo rhoncus, eget vehicula quam condimentum. Etiam
-        aliquam vehicula lectus, tempor varius libero.
+        We’ve been through so much together (the good and the bad), but it’s
+        made our relationship even stronger. I am soooo excited to marry my best
+        friend! There’s no one I’d rather adventure through life with.<br />~Tori
       </p>
       <div class="animation" ref="button">
         <md-button class="md-primary md-raised" @click="scrollTo"
