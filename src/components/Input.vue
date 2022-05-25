@@ -5,6 +5,7 @@
       :value="value.value"
       @input="onInput"
       @keyup.enter="$emit('keyupEnter')"
+      :required="required"
     ></md-input>
     <span v-for="(error, index) of errors" :key="index" class="md-error">{{
       error

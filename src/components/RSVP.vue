@@ -342,7 +342,7 @@ export default {
 
   &.found {
     max-width: 100%;
-    padding: 2vw 1vw 5vw 2vw;
+    padding: 2vw 0.5vw 5vw 0.5vw;
   }
 }
 
@@ -356,6 +356,7 @@ export default {
 }
 
 .rsvp__email {
+  margin: 10px auto;
   width: 250px;
 }
 
