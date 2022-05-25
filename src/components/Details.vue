@@ -88,6 +88,7 @@ export default {
   justify-content: center;
   padding: 100px 0 200px 0;
   background-color: #f7f7f7;
+  width: 100vw;
 }
 
 .details__date {

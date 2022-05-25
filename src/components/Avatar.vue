@@ -79,6 +79,9 @@ export default {
     color: #1a1a1a;
     text-align: center;
     padding: 20px 0;
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 }
 .avatar__image {

@@ -50,9 +50,12 @@ export default {
   position: relative;
   width: 100%;
   display: flex;
-  padding-left: 8vw;
+  flex-direction: column;
 
   @media (min-width: 851px) {
+    flex-direction: row;
+    justify-content: space-between;
+
     &:nth-of-type(odd) {
       flex-direction: row-reverse;
 
@@ -60,7 +63,6 @@ export default {
         padding: 3vw 3vw 3vw 6vw;
       }
     }
-    padding: 0;
   }
 
   &:hover {
@@ -72,6 +74,10 @@ export default {
   &__wrapper {
     width: 50vw;
     padding: 3vw 5vw 3vw 3vw;
+
+    @media (max-width: 850px) {
+      width: 100vw;
+    }
   }
 
   &__title {
@@ -130,7 +136,9 @@ export default {
     transition-duration: 0.5s;
 
     @media (max-width: 850px) {
-      left: -35px;
+      left: -20px;
+      height: 40px;
+      width: 40px;
     }
   }
 }

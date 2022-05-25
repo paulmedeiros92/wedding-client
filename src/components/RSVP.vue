@@ -12,13 +12,26 @@
         <md-table v-model="forms" md-card>
           <md-table-row slot="md-table-row" slot-scope="{ index }">
             <md-table-cell md-label="First Name" md-sort-by="firstName">
-              <Input v-model="forms[index].firstName" required />
+              <Input
+                class="rsvp__first"
+                v-model="forms[index].firstName"
+                required
+              />
             </md-table-cell>
             <md-table-cell md-label="Last Name" md-sort-by="lastName">
-              <Input v-model="forms[index].lastName" required />
+              <Input
+                class="rsvp__last"
+                v-model="forms[index].lastName"
+                required
+              />
             </md-table-cell>
             <md-table-cell md-label="Food" md-sort-by="food">
-              <Select :options="foods" v-model="forms[index].food" required />
+              <Select
+                class="rsvp__food"
+                :options="foods"
+                v-model="forms[index].food"
+                required
+              />
             </md-table-cell>
             <md-table-cell md-label="Notes" md-sort-by="notes">
               <Input v-model="forms[index].notes" />
@@ -379,6 +392,15 @@ export default {
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 50%);
+}
+
+.rsvp__first,
+.rsvp__last {
+  width: 100px;
+}
+
+.rsvp__food {
+  width: 124px;
 }
 
 .md-snackbar.md-position-center {

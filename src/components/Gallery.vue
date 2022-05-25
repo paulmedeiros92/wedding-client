@@ -2,6 +2,12 @@
   <div class="gallery">
     <div class="gallery-title animation" ref="title">Best Moments</div>
     <div class="gallery__viewer">
+      <div class="gallery__arrow" @click="changeIndex(1)">
+        <md-icon style="color: white">chevron_right</md-icon>
+      </div>
+      <div class="gallery__arrow left" @click="changeIndex(-1)">
+        <md-icon style="color: white">chevron_left</md-icon>
+      </div>
       <div
         v-for="image of images"
         :key="image.src"
@@ -36,6 +42,7 @@ export default {
         .map((src) => src.split("./")[1]),
       visibleIndex: 0,
       observer: null,
+      interval: null,
     };
   },
   mounted() {
@@ -54,11 +61,20 @@ export default {
     getImgUrl(image) {
       return require(`@/assets/gallery/${image.split("./")[1]}`);
     },
+    changeIndex(amount) {
+      const offset = (this.visibleIndex + amount) % this.imageSources.length;
+      if (offset < 0) {
+        this.visibleIndex = this.imageSources.length + offset;
+      } else {
+        this.visibleIndex = offset;
+      }
+    },
   },
   watch: {
     index: {
       handler() {
-        setTimeout(
+        clearInterval(this.interval);
+        this.interval = setInterval(
           () =>
             (this.visibleIndex = (this.visibleIndex + 1) % this.images.length),
           5000
@@ -69,6 +85,7 @@ export default {
   },
   beforeUnmount() {
     this.observer.disconnect();
+    clearInterval(this.interval);
   },
 };
 </script>
@@ -122,6 +139,26 @@ export default {
   @media (max-width: 800px) {
     left: 50%;
     height: 400px;
+  }
+}
+
+.gallery__arrow {
+  position: absolute;
+  right: 5px;
+  top: calc(50% - 15px);
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  padding: 3px;
+  z-index: 99;
+  transition: background-color 0.2s ease-in;
+
+  &.left {
+    left: 5px;
+  }
+
+  &:hover {
+    background-color: rgba(238, 238, 238, 0.4);
   }
 }
 

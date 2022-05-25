@@ -16,14 +16,14 @@ export default {
     label: {
       type: String,
       required: true,
-    }
+    },
   },
   computed: {
     displayNumber() {
       if (this.number > 9) return this.number.toString();
       return `0${this.number}`;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -36,10 +36,15 @@ export default {
   padding: 25px;
   margin: 25px 15px 0 15px;
   background-color: white;
+
+  @media (max-width: 600px) {
+    padding: 15px;
+    margin: 25px 5px 0 5px;
+  }
 }
 
 .timer__number {
-  color: #70A076;
+  color: #70a076;
   font-weight: 400;
   font-size: 35px;
   line-height: 100%;

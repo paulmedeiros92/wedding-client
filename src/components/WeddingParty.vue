@@ -114,21 +114,7 @@ export default {
   justify-content: flex-start;
   margin: 0 5vw 2vw 5vw;
   gap: 3vw;
-  overflow-x: scroll;
+  overflow-x: hidden;
   scrollbar-width: thin;
-}
-
-.wedding-party__portrait {
-  margin: 40px 15px 30px 15px;
-  height: 270px;
-  width: 270px;
-  overflow: hidden;
-  border-radius: 50%;
-  position: relative;
-
-  .image {
-    position: absolute;
-    height: 270px;
-  }
 }
 </style>
