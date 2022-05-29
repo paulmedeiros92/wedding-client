@@ -113,6 +113,7 @@ export default {
 
       @media (max-width: 850px) {
         left: 0;
+        opacity: 0;
       }
     }
 
@@ -125,7 +126,8 @@ export default {
       margin: 0 auto;
 
       @media (max-width: 850px) {
-        margin-left: -7px;
+        margin-left: 0;
+        opacity: 0;
       }
     }
   }

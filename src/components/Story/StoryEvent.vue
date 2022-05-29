@@ -137,7 +137,9 @@ export default {
     transition-duration: 0.5s;
 
     @media (max-width: 850px) {
-      left: -20px;
+      left: unset;
+      right: 0;
+      top: 20px;
       height: 40px;
       width: 40px;
     }

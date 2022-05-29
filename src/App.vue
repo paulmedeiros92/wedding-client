@@ -9,6 +9,7 @@
     <Gallery ref="gallery" />
     <WeddingParty ref="party" />
     <RSVP ref="rsvp" />
+    <Gifts />
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import Gallery from "@/components/Gallery.vue";
 import WeddingParty from "@/components/WeddingParty.vue";
 import RSVP from "@/components/RSVP.vue";
 import Story from "@/components/Story/Story.vue";
+import Gifts from "@/components/Gifts.vue";
 
 export default {
   name: "App",
@@ -35,6 +37,7 @@ export default {
     WeddingParty,
     RSVP,
     Story,
+    Gifts,
   },
   data() {
     return {
@@ -68,6 +71,16 @@ body {
   --primary-color: #70a076;
   --accent-color: #e49497;
   --grey-color: #808080;
+}
+
+.title {
+  margin-bottom: 25px;
+  font-family: "Alex Brush", sans-serif;
+  color: #1a1a1a;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 60px;
+  text-align: center;
 }
 
 .animation {
