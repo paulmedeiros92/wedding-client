@@ -74,9 +74,10 @@ export default {
   &__wrapper {
     width: 50vw;
     padding: 3vw 5vw 3vw 3vw;
+    box-sizing: border-box;
 
     @media (max-width: 850px) {
-      width: 100vw;
+      width: 100%;
     }
   }
 
