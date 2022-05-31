@@ -4,12 +4,12 @@
     <div class="gifts__wrapper">
       <a
         class="gifts__option"
-        href="http://www.zola.com/registry/victoriaandpauloctober8"
+        href="https://www.paypal.com/donate/?business=RHJNC2ULN6ZVC&no_recurring=1&item_name=Tori+and+Paul%27s+wedding%2C+honeymoon%2C+future+fund%21&currency_code=USD"
         target="_blank"
         rel="noopener"
       >
-        <div class="gifts__image registry"></div>
-        <div class="gifts__title">Registry</div>
+        <div class="gifts__image paypal"></div>
+        <div class="gifts__title">Honeymoon</div>
       </a>
       <img class="gifts__succulent" src="@/assets/succulent.png" />
       <a
@@ -18,8 +18,8 @@
         target="_blank"
         rel="noopener"
       >
-        <div class="gifts__image paypal"></div>
-        <div class="gifts__title">Honeymoon</div>
+        <div class="gifts__image registry"></div>
+        <div class="gifts__title">Registry</div>
       </a>
     </div>
   </div>

@@ -71,7 +71,7 @@ export default {
     },
   },
   watch: {
-    index: {
+    visibleIndex: {
       handler() {
         clearInterval(this.interval);
         this.interval = setInterval(
