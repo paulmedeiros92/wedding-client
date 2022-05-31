@@ -1,15 +1,26 @@
 <template>
   <div class="gifts">
-    <h2 class="title">Gifts</h2>
+    <h2 class="gifts__header title">Gifts</h2>
     <div class="gifts__wrapper">
-      <div class="gifts__option">
+      <a
+        class="gifts__option"
+        href="http://www.zola.com/registry/victoriaandpauloctober8"
+        target="_blank"
+        rel="noopener"
+      >
         <div class="gifts__image registry"></div>
         <div class="gifts__title">Registry</div>
-      </div>
-      <div class="gifts__option">
+      </a>
+      <img class="gifts__succulent" src="@/assets/succulent.png" />
+      <a
+        class="gifts__option"
+        href="http://www.zola.com/registry/victoriaandpauloctober8"
+        target="_blank"
+        rel="noopener"
+      >
         <div class="gifts__image paypal"></div>
         <div class="gifts__title">Honeymoon</div>
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -36,27 +47,34 @@ export default {
 
 <style lang="scss" scoped>
 .gifts {
+  background-image: url("../assets/gallery.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 60px 20px;
+
+  &__header {
+    margin-top: 0;
+  }
+
   &__wrapper {
     position: relative;
-    padding-bottom: 100px;
     display: flex;
     justify-content: space-evenly;
   }
 
   &__image {
-    height: 25vw;
-    width: 25vw;
-    background-size: 20vw;
+    height: 18vw;
+    width: 18vw;
+    background-size: 14vw;
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
     border-radius: 50%;
-    box-shadow: 1px 1px 6px black;
-    cursor: pointer;
+    box-shadow: 0 0 6px #999;
 
-    // TODO: I need to look this up when I get home
-    &:focus :active {
-      box-shadow: none;
+    &:hover {
+      box-shadow: 0 0 10px #333;
     }
 
     &.registry {
@@ -81,11 +99,15 @@ export default {
   }
 
   &__option {
-    width: 25vw;
+    width: 18vw;
   }
 
   &__center {
     text-align: center;
+  }
+
+  &__succulent {
+    width: 18vw;
   }
 }
 </style>

@@ -148,7 +148,7 @@ export default {
       rows: [],
       forms: [],
       foods: ["No Selection", "Chicken", "Lobster", "Vegetarian"],
-      email: { value: null, invalid: true },
+      email: { value: "", invalid: true },
       loading: false,
       observer: null,
       showSnackbar: false,
