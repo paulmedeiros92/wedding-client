@@ -3,20 +3,16 @@
     <div class="wedding-party__title animation" ref="title">Wedding Party!</div>
     <div class="wedding-party__nav">
       <div
-        :class="{ 'wedding-party__tab': true, active: !isGroomside }"
-        @click="isGroomside = false"
+        v-for="tab of tabs"
+        :key="tab"
+        :class="['wedding-party__tab', { active: tab === selected }]"
+        @click="selected = tab"
       >
-        BRIDESMAIDS
-      </div>
-      <div
-        :class="{ 'wedding-party__tab': true, active: isGroomside }"
-        @click="isGroomside = true"
-      >
-        GROOMSMEN
+        {{ tab }}
       </div>
     </div>
     <div class="wedding-party__gallery animation" ref="gallery">
-      <div v-for="person of people" :key="person.src">
+      <div v-for="person of members[selected]" :key="person.src">
         <Avatar
           :imgSrc="person.src"
           :size="15"
@@ -39,33 +35,39 @@ export default {
   },
   data() {
     return {
-      groomsParty: [
-        { name: "Joseph Guarino", src: "party/joe.webp" },
-        { name: "Alexander Hipsher", src: "party/alex.webp" },
-        { name: "Michael Medeiros", src: "party/michael.webp" },
-        { name: "Moses Medeiros", src: "party/moses.webp" },
-        { name: "David Medeiros", src: "party/david.webp" },
-      ],
-      bridesParty: [
-        { name: "Debbie Vuong", src: "party/debbie.webp" },
-        { name: "Jenny Moran", src: "party/jenny.webp" },
-        { name: "Antonio Bass", src: "party/antonio.webp" },
-        { name: "Hannah Scarff", src: "party/hannah.webp" },
-        { name: "Keala Kieckhafer", src: "party/keala.webp" },
-      ],
-      isGroomside: false,
+      members: {
+        groomsmen: [
+          { name: "Joseph Guarino", src: "party/joe.webp" },
+          { name: "Alexander Hipsher", src: "party/alex.webp" },
+          { name: "Michael Medeiros", src: "party/michael.webp" },
+          { name: "Moses Medeiros", src: "party/moses.webp" },
+          { name: "David Medeiros", src: "party/david.webp" },
+        ],
+        bridesmaids: [
+          { name: "Debbie Vuong", src: "party/debbie.webp" },
+          { name: "Jenny Moran", src: "party/jenny.webp" },
+          { name: "Antonio Bass", src: "party/antonio.webp" },
+          { name: "Hannah Scarff", src: "party/hannah.webp" },
+          { name: "Keala Kieckhafer", src: "party/keala.webp" },
+        ],
+        staff: [
+          { name: "Alexander Hipsher", src: "party/alex.webp" },
+          { name: "Jenny Moran", src: "party/jenny.webp" },
+          { name: "Antonio Bass", src: "party/antonio.webp" },
+          { name: "Hannah Scarff", src: "party/hannah.webp" },
+          { name: "Keala Kieckhafer", src: "party/keala.webp" },
+        ],
+      },
       observer: null,
+      tabs: ["bridesmaids", "groomsmen"],
+      selected: "bridesmaids",
     };
   },
   mounted() {
     this.observer = observer.init();
     this.observer.observe(this.$refs.title);
     this.observer.observe(this.$refs.gallery);
-  },
-  computed: {
-    people() {
-      return this.isGroomside ? this.groomsParty : this.bridesParty;
-    },
+    this.selected = this.tabs[Math.floor(Math.random() * this.tabs.length)];
   },
   beforeUnmount() {
     this.observer.disconnect();
@@ -100,6 +102,7 @@ export default {
   border: 3px solid rgba(112, 160, 112, 0);
   cursor: pointer;
   transition: border 0.1s ease-in;
+  text-transform: uppercase;
 
   &.active {
     color: #70a070;
