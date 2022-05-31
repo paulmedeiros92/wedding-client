@@ -191,7 +191,7 @@ export default {
         );
         this.attendees = response.data?.data ?? [];
         if (this.attendees.length) {
-          this.email.value = this.attendees[0].email;
+          this.email.value = this.attendees[0].email || "";
           this.forms = this.buildForms(this.attendees);
         } else {
           this.snackbar = {
