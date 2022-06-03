@@ -1,9 +1,10 @@
 <template>
   <div class="gifts">
-    <h2 class="gifts__header title">Gifts</h2>
+    <h2 class="gifts__header title animation" ref="title">Gifts</h2>
     <div class="gifts__wrapper">
       <a
-        class="gifts__option"
+        class="gifts__option animation animation--left"
+        ref="paypal"
         href="https://www.paypal.com/donate/?business=RHJNC2ULN6ZVC&no_recurring=1&item_name=Tori+and+Paul%27s+wedding%2C+honeymoon%2C+future+fund%21&currency_code=USD"
         target="_blank"
         rel="noopener"
@@ -11,9 +12,14 @@
         <div class="gifts__image paypal"></div>
         <div class="gifts__title">Honeymoon</div>
       </a>
-      <img class="gifts__succulent" src="@/assets/succulent.png" />
+      <img
+        class="gifts__succulent animation"
+        ref="succulent"
+        src="@/assets/succulent.png"
+      />
       <a
-        class="gifts__option"
+        class="gifts__option animation animation--right"
+        ref="zola"
         href="http://www.zola.com/registry/victoriaandpauloctober8"
         target="_blank"
         rel="noopener"
@@ -37,7 +43,10 @@ export default {
   },
   mounted() {
     this.observer = observer.init();
-    this.observer.observe(this.$refs.names);
+    this.observer.observe(this.$refs.title);
+    this.observer.observe(this.$refs.paypal);
+    this.observer.observe(this.$refs.succulent);
+    this.observer.observe(this.$refs.zola);
   },
   beforeUnmount() {
     this.observer.disconnect();
