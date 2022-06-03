@@ -38,7 +38,7 @@ export default {
       members: {
         groomsmen: [
           { name: "Joseph Guarino", src: "party/joe.webp" },
-          { name: "Alexander Hipsher", src: "party/alex.webp" },
+          { name: "Alexander Hipsher", src: "party/alex.jpg" },
           { name: "Michael Medeiros", src: "party/michael.webp" },
           { name: "Moses Medeiros", src: "party/moses.webp" },
           { name: "David Medeiros", src: "party/david.webp" },
@@ -51,7 +51,7 @@ export default {
           { name: "Keala Kieckhafer", src: "party/keala.webp" },
         ],
         staff: [
-          { name: "Alexander Hipsher", src: "party/alex.webp" },
+          { name: "Alexander Hipsher", src: "party/alex.jpg" },
           { name: "Jenny Moran", src: "party/jenny.webp" },
           { name: "Antonio Bass", src: "party/antonio.webp" },
           { name: "Hannah Scarff", src: "party/hannah.webp" },

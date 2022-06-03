@@ -1,9 +1,7 @@
 <template>
   <div class="landscape">
     <div class="landscape__story-wrapper">
-      <div class="landscape__story-title animation" ref="title">
-        We Are Together
-      </div>
+      <div class="landscape__story-title animation" ref="title">Woohooo!!!</div>
       <p class="landscape__story-body animation" ref="story">
         We’ve been through so much together (the good and the bad), but it’s
         made our relationship even stronger. I am soooo excited to marry my best
