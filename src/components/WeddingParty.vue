@@ -39,9 +39,9 @@ export default {
         groomsmen: [
           { name: "Joseph Guarino", src: "party/joe.webp" },
           { name: "Alexander Hipsher", src: "party/alex.jpg" },
+          { name: "Johnny Lam", src: "party/lam.jpg" },
           { name: "Michael Medeiros", src: "party/michael.webp" },
-          { name: "Moses Medeiros", src: "party/moses.webp" },
-          { name: "David Medeiros", src: "party/david.webp" },
+          { name: "Jonathan Vuong", src: "party/jonathan.jpg" },
         ],
         bridesmaids: [
           { name: "Debbie Vuong", src: "party/debbie.webp" },
