@@ -1,7 +1,8 @@
 <template>
   <div class="details">
     <div class="details__date animation" ref="date">
-      Saturday, October 8th, 2022
+      <div>Saturday, October 8th, 2022</div>
+      <div>4:30 pm</div>
     </div>
     <a
       class="animation"
@@ -86,7 +87,7 @@ export default {
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  padding: 100px 0 200px 0;
+  padding: 100px 0 175px 0;
   background-color: #f7f7f7;
   width: 100%;
 }
