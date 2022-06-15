@@ -13,5 +13,5 @@ export function postAttendees(attendees) {
 }
 
 export function markForDeletion(attendeeId) {
-  return api.delete(`/attendee/${attendeeId}`);
+  return api.put(`/attendee/mark/${attendeeId}`);
 }
