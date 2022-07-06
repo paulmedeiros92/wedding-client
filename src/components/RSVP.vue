@@ -246,7 +246,7 @@ export default {
           if (attendees[index]) {
             attendee = { ...attendees[index] };
           } else {
-            attendee = { ...attendees[0] };
+            attendee = { ...attendees[0], hashWord: null };
           }
           Object.entries(form).forEach(
             ([key, field]) => (attendee[key] = field.value)
