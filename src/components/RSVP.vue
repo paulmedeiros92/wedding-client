@@ -210,10 +210,19 @@ export default {
         this.loading = false;
       }
     },
+    capitalize(name) {
+      return name
+        .split(" ")
+        .map((part) => part[0].toUpperCase() + part.slice(1))
+        .join(" ");
+    },
     buildForms(attendees) {
       const forms = attendees.map((attendee) => ({
-        firstName: { value: attendee.firstName, invalid: true },
-        lastName: { value: attendee.lastName, invalid: true },
+        firstName: {
+          value: this.capitalize(attendee.firstName),
+          invalid: true,
+        },
+        lastName: { value: this.capitalize(attendee.lastName), invalid: true },
         notes: { value: attendee.notes, invalid: true },
         food: { value: attendee.food, invalid: true },
         isAttending: { value: attendee.isAttending, invalid: false },
