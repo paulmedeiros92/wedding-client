@@ -1,7 +1,31 @@
 <template>
   <div class="profile">
+    <div class="title">Accommodations</div>
     <div class="profile__avatar-wrapper">
       <Avatar imgSrc="photos/profile-tori.webp" />
+      <div class="details">
+        <p>
+          There are many hotel options located within 15 minutes of
+          <a
+            target="_blank"
+            href="https://www.google.com/maps/place/Northampton+House+-+Weddings+and+Events/@40.3834213,-111.8055761,17z/data=!3m1!4b1!4m5!3m4!1s0x874d810ca93ee429:0xc35afe0c1947a8f2!8m2!3d40.3833936!4d-111.8031206"
+            ref="link"
+            class="link"
+            >Northampton House</a
+          >. <strong>We will be staying at:</strong>
+        </p>
+        <a
+          target="_blank"
+          href="https://www.google.com/maps/place/3701+N+Ashton+Blvd,+Lehi,+UT+84043/@40.4336761,-111.9058726,15z/data=!4m5!3m4!1s0x87528031bf3ed901:0x43bb2dc91833eff9!8m2!3d40.4334922!4d-111.8968223"
+          ref="inn"
+          class="inn"
+        >
+          <p>
+            Holiday Inn Express & Suites<br />3701 N. Ashton Blvd.<br />Lehi, UT
+            84043
+          </p>
+        </a>
+      </div>
       <Avatar imgSrc="photos/profile-paul.webp" :isLeft="false" />
     </div>
     <div class="profile__text animation" ref="names">
@@ -45,10 +69,20 @@ export default {
   &__avatar-wrapper {
     display: flex;
     justify-content: center;
-    gap: 15vw;
+    gap: 10vw;
+    text-align: center;
+
+    .details {
+      display: flex;
+      flex-flow: column;
+      justify-content: space-around;
+      .inn p {
+        color: #1a1a1a;
+      }
+    }
 
     @media (max-width: 600px) {
-      gap: 30vw;
+      gap: 5vw;
     }
   }
 
@@ -68,21 +102,11 @@ export default {
     display: flex;
     justify-content: center;
     align-content: center;
-
-    @media (max-width: 600px) {
-      flex-flow: column;
-      height: 100%;
-      margin: 0 auto -35px auto;
-    }
   }
 
   &__succulent {
     width: 100px;
     margin: -17px 15px 0 15px;
-
-    @media (max-width: 600px) {
-      margin: 0 auto;
-    }
   }
 }
 </style>

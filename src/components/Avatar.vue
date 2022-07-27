@@ -71,6 +71,7 @@ export default {
 }
 .avatar {
   position: relative;
+  margin: auto;
 
   &__title {
     font-size: 14px;
