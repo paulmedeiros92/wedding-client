@@ -1,9 +1,9 @@
 <template>
   <div class="profile">
-    <div class="title">Accommodations</div>
+    <div class="title animation" ref="title">Accommodations</div>
     <div class="profile__avatar-wrapper">
       <Avatar imgSrc="photos/profile-tori.webp" />
-      <div class="details">
+      <div class="details animation" ref="accommodations">
         <p>
           There are many hotel options located within 15 minutes of
           <a
@@ -52,7 +52,9 @@ export default {
   },
   mounted() {
     this.observer = observer.init();
+    this.observer.observe(this.$refs.title);
     this.observer.observe(this.$refs.names);
+    this.observer.observe(this.$refs.accommodations);
   },
   beforeUnmount() {
     this.observer.disconnect();
