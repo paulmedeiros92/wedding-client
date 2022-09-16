@@ -12,19 +12,19 @@
             ref="link"
             class="link"
             >Northampton House</a
-          >. <strong>We will be staying at:</strong>
+          >.
         </p>
-        <a
-          target="_blank"
-          href="https://www.google.com/maps/place/3701+N+Ashton+Blvd,+Lehi,+UT+84043/@40.4336761,-111.9058726,15z/data=!4m5!3m4!1s0x87528031bf3ed901:0x43bb2dc91833eff9!8m2!3d40.4334922!4d-111.8968223"
-          ref="inn"
-          class="inn"
-        >
-          <p>
-            Holiday Inn Express & Suites<br />3701 N. Ashton Blvd.<br />Lehi, UT
-            84043
-          </p>
-        </a>
+
+        <p>
+          <a
+            target="_blank"
+            href="https://www.google.com/maps/place/531+E+Rue+De+Matth,+Vineyard,+UT+84058/@40.297792,-111.7429093,17z/data=!3m1!4b1!4m5!3m4!1s0x874d84b4d507f5a3:0x5f67006ce9414161!8m2!3d40.2977879!4d-111.7407153"
+            ref="inn"
+            class="inn"
+            >We will be staying at a nearby Air B&B</a
+          ><br />October 7th we will host a small rehearsal dinner<br />Call us
+          when you get here @ 702-328-8639
+        </p>
       </div>
       <Avatar imgSrc="photos/profile-paul.webp" :isLeft="false" />
     </div>
